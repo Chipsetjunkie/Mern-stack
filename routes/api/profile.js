@@ -1,17 +1,37 @@
 const express= require('express');
 const profile = express.Router();
 const profile_db = require("../../models/Profile");
-const user_db = require("../../models/User")
+const user_db = require("../../models/User");
+const post_db = require("../../models/Post");
 const auth = require("../../middleware/auth");
 const {check,validationResult} = require('express-validator');
 
+profile.get("/test",(req,res)=>{
+    res.send("Tiny test")
+});
 
-profile.get('/',auth,async (req,res) =>{
+profile.get('/me',auth,async (req,res) =>{
+      user_profile = await profile_db.findOne({user:req.user.id}).populate('user',['name','avatar']);
+      if(!user_profile){
+        res.status(500).json({message:"Profile doesnt exist"})
+      }
+      else{
+        console.log("entered profile")
+        res.json({user_profile})
+      }
+});
+
+
+
+
+
+profile.get('/',async (req,res) =>{
       user_profile = await profile_db.find().populate('user',['name','avatar']);
       if(!user_profile){
         res.status(500).json({message:"Profile doesnt exist"})
       }
       else{
+        console.log("entered profile")
         res.json({user_profile})
       }
 });
@@ -84,8 +104,9 @@ profile.get('/user/:user_id',async (req,res) =>{
           const profile = await profile_db.findOne({user:req.params.user_id}).populate('user',['name','avatar'])
           if (!profile){
               console.log(profile)
+              res.status(500).json({message:"profile does not exist"})
           }
-          res.status(500).json({message:"profile does not exist"})
+
           res.json({profile})
         }catch(err){
           if (err.kind == "ObjectId"){
@@ -98,6 +119,9 @@ profile.get('/user/:user_id',async (req,res) =>{
 
 profile.delete('/',auth,async(req,res)=>{
       try{
+
+          await post_db.deleteMany({user:req.user.id});
+
           await profile_db.findOneAndDelete({user:req.user.id})
 
           await user_db.findOneAndDelete({_id:req.user.id})

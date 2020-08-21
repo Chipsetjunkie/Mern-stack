@@ -17,7 +17,7 @@ user.post('/',[
 ],async (req,res) =>{
   const errors = validationResult(req)
   if (!errors.isEmpty()){
-    res.status(400).json({message:errors.array()});
+    res.status(400).json({errors:errors.array()});
   }
   else{
     const {name,email,password} = req.body;
