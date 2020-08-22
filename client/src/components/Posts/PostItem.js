@@ -21,7 +21,6 @@ const PostItem = ({
   },
   showActions
 }) => {
-  console.log(name)
   return(
   <>
    <div className="posts">

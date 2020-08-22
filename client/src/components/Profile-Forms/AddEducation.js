@@ -1,7 +1,7 @@
 import React,{useState} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import{withRouter} from 'react-router-dom'
+import{withRouter,Link} from 'react-router-dom'
 import {addEducation} from '../Actions/profile';
 
 const AddEducation = ({addEducation,history}) =>{
@@ -89,7 +89,7 @@ const AddEducation = ({addEducation,history}) =>{
             ></textarea>
           </div>
           <input type="submit" className="btn btn-primary my-1" onChange={onChange}/>
-          <a className="btn btn-light my-1" href="dashboard.html">Go Back</a>
+          <Link className="btn btn-light my-1" to="/dashboard">Go Back</Link>
         </form>
    </>
     )

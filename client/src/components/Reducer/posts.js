@@ -47,21 +47,23 @@ export default function(state=initialState,action){
         }
 
     case ADD_COMMENT:
-      return{
-      ...state.post,
-      comments:payload,
-    loading:false}
+    const new_comment=[...state.post.post_.comments,payload]
+    const post_= new_comment[(new_comment.length - 1).toString()]
+    return{
+      ...state,
+      post:{post_},
+      loading:false
+    }
 
     case REMOVE_COMMENT:
+        const new_comments = state.post.post_.comments.filter(
+          comment=>comment._id !== payload)
+        state.post.post_.comments = new_comments
         return{
           ...state,
-          post:{
-            ...state.post,
-            comments:state.post.comments.filter(
-              comment=>comment._id !== payload),
-              loading:false
-          }
+          loading:false
         }
+
 
     case UPDATE_LIKES:
      return{

@@ -42,9 +42,9 @@ const EditProfile = ({profile:{profile,loading},createProfile,getCurrentProfile,
         e.preventDefault();
         createProfile(formData,history,true);
       }
-
       useEffect(()=>{
         getCurrentProfile();
+        console.log(profile)
         setFormData({
           company:loading || !profile.user_profile.company ? '' : profile.user_profile.company,
           website:loading || !profile.user_profile.website? '' : profile.user_profile.website,
@@ -61,21 +61,7 @@ const EditProfile = ({profile:{profile,loading},createProfile,getCurrentProfile,
         })
 
 
-      },[loading,
-        getCurrentProfile,
-        profile.user_profile.company,
-        profile.user_profile.website,
-        profile.user_profile.location,
-        profile.user_profile.bio,
-      profile.user_profile.status,
-      profile.user_profile.githubusername,
-      profile.user_profile.skills,
-    profile.user_profile.social.youtube,
-    profile.user_profile.social.facebook,
-  profile.user_profile.social.twitter,
-  profile.user_profile.social.instagram,
-  profile.user_profile.social.linkedin,
-profile.user_profile.social]
+      },[loading,getCurrentProfile]
 )
 
   return(

@@ -1,8 +1,9 @@
 import React,{useState} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import{withRouter} from 'react-router-dom'
+import{withRouter,Link} from 'react-router-dom'
 import {addExperience} from '../Actions/profile';
+
 
 const AddExperience = ({addExperience,history}) =>{
   const [formData,setFormData] = useState({company:"",
@@ -73,7 +74,7 @@ const AddExperience = ({addExperience,history}) =>{
        ></textarea>
      </div>
      <input type="submit" className="btn btn-primary my-1" />
-     <a className="btn btn-light my-1" href="dashboard.html">Go Back</a>
+     <Link className="btn btn-light my-1" to="/dashboard">Go Back</Link>
    </form>
    </>
     )

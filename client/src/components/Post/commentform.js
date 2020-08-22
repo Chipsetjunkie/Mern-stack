@@ -1,15 +1,15 @@
 import React,{useState} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {addComment} from '../Actions/Post';
+import {addComment} from '../Actions/post';
 
-const CommentForm = ({postId,addComment}) => {}
+const CommentForm = ({postId,addComment}) => {
 
   const [text,setText] = useState('');
 
   const submitHandler = e =>{
     e.preventDefault();
-    addPost(postId,{text})
+    addComment(postId,{text})
     setText('')
   }
 
@@ -34,7 +34,6 @@ const CommentForm = ({postId,addComment}) => {}
     </div>
   )
 }
-};
 
 CommentForm.propTypes = {
   addComment: PropTypes.func.isRequired
